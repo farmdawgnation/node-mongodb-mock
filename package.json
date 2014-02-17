@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "test": "./node_modules/.bin/mocha -C --compilers coffee:coffee-script -u tdd -R spec --timeout 2000"
+    "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register -u tdd -R spec --timeout 2000"
   },
   "dependencies": {
     "coffee-script": "*"
   },
   "devDependencies": {
+    "coffee-script": "1.7.1",
     "chai": "*",
     "mocha": "*"
   },
