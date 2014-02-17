@@ -1,0 +1,18 @@
+{
+  "name": "mongodb-mock",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "test": "./node_modules/.bin/mocha -C --compilers coffee:coffee-script -u tdd -R spec --timeout 2000"
+  },
+  "dependencies": {
+    "coffee-script": "*"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "mocha": "*"
+  },
+  "engines": {
+      "node": "0.10.x"
+  }
+}
