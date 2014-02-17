@@ -35,12 +35,26 @@ describe "MongoMockCollection", ->
 
   it 'should update a document by some other field value'
 
-  it 'should update a document using $inc'
+  it 'should update a document using the $inc operator'
 
-  it 'should update a document using $rename'
+  it 'should update a document using the $rename operator'
 
-  it 'should update a document using $set'
+  it 'should update a document using the $set operator'
 
-  it 'should update a document using $unset'
+  it 'should update a document using the $unset operator'
+
+  it 'should update a document using the $ positional operator'
+
+  it 'should update a document using the $addToSet operator'
+
+  it 'should update a document using the $pop operator'
+
+  it 'should update a document using the $pullAll operator'
+
+  it 'should update a document using the $pull operator'
+
+  it 'should update a document using the $pushAll operator'
+
+  it 'should update a document using the $push operator'
 
   it 'should update a document by some other parameter'
