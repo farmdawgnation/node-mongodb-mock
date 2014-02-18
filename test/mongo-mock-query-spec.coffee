@@ -7,7 +7,7 @@ describe "MongoMockQuery", ->
   it 'should match a document using a direct value search', ->
     doc1 = {bacon: "zz", wakka: 123}
     doc2 = {bacon: "foek", wakka: 999}
-    doc2 = {bacon: "eokf"}
+    doc3 = {bacon: "eokf"}
 
     query = new MongoMockQuery {wakka: 123}
 
@@ -95,7 +95,7 @@ describe "MongoMockQuery", ->
   it 'should match a document using the $exists operator', ->
     doc1 = {bacon: "zz", wakka: 123}
     doc2 = {bacon: "foek", wakka: 999}
-    doc2 = {bacon: "eokf"}
+    doc3 = {bacon: "eokf"}
 
     query1 = new MongoMockQuery {wakka: {"$exists": true}}
     query2 = new MongoMockQuery {wakka: {"$exists": false}}
