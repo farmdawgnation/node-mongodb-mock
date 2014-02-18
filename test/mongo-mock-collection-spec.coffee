@@ -7,54 +7,47 @@ describe "MongoMockCollection", ->
 
   it 'should throw an error if an incorrectly formatted array is passed in'
 
-  it 'should find a document by _id'
+  describe "#find", ->
+    it 'should find a single doc when a single doc matches'
 
-  it 'should find a document by some other field value'
+    it 'should find no docs when no docs match'
 
-  it 'should find a document using the $gt operator'
+    it 'should find multiple docs when multiple match'
 
-  it 'should find a document using the $gte operator'
+  describe "#findOne", ->
+    it 'should find a single doc when a single doc matches'
 
-  it 'should find a document using the $in operator'
+    it 'should find a single doc when multiple docs match'
 
-  it 'should find a document using the $lt oeprator'
+    it 'should find no docs when no docs match'
 
-  it 'should find a document using the $lte operator'
+  describe "#insert", ->
+    it 'should insert a new, properly formatted document'
 
-  it 'should find a document using the $ne operator'
+    it 'should error for an inproperly formatted document'
 
-  it 'should find a document using the $nin operator'
+  describe "#update", ->
+    it 'should update a single match when only one matches w/ multi off'
 
-  it 'should find a document using the $exists operator'
+    it 'should update a single match when only one matches w/ multi on'
 
-  it 'should find a document using the $type operator'
+    it 'should update a single match when multiple match w/ multi off'
 
-  it 'should insert a new document'
+    it 'should update all matches w/ multiple matches and multi on'
 
-  it 'should update a document by _id'
+    it 'should update a single doc with no query and mutli off'
 
-  it 'should update a document by some other field value'
+    it 'should update all docs with no query and multi on'
 
-  it 'should update a document using the $inc operator'
+    it 'should upsert a doc if there are no matches w/ upsert on'
 
-  it 'should update a document using the $rename operator'
+    it 'should update no docs when none match w/ multi off'
 
-  it 'should update a document using the $set operator'
+    it 'should update no docs when none match w/ multi on'
 
-  it 'should update a document using the $unset operator'
+  describe "#remove", ->
+    it 'should remove all documents matching a query'
 
-  it 'should update a document using the $ positional operator'
+    it 'should remove no documents if no documents match'
 
-  it 'should update a document using the $addToSet operator'
-
-  it 'should update a document using the $pop operator'
-
-  it 'should update a document using the $pullAll operator'
-
-  it 'should update a document using the $pull operator'
-
-  it 'should update a document using the $pushAll operator'
-
-  it 'should update a document using the $push operator'
-
-  it 'should update a document by some other parameter'
+    it 'should remove all documents with no query provided'
