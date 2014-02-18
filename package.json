@@ -6,7 +6,8 @@
     "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register -u tdd -R spec --timeout 2000"
   },
   "dependencies": {
-    "coffee-script": "*"
+    "coffee-script": "*",
+    "underscore": "*"
   },
   "devDependencies": {
     "coffee-script": "1.7.1",
