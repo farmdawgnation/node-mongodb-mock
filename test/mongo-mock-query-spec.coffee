@@ -117,4 +117,13 @@ describe "MongoMockQuery", ->
     query.match(doc1).should.equal false
     query.match(doc2).should.equal true
 
-  it 'should correctly coalesce query terms'
+  it 'should correctly coalesce query terms', ->
+    doc1 = {bacon: "zz", wakka: 123}
+    doc2 = {bacon: "foek", wakka: 999}
+    doc3 = {bacon: "eokf"}
+
+    query = new MongoMockQuery {wakka: {"$exists": true}, wakka: {"$gt": 200}}
+
+    query.match(doc1).should.equal false
+    query.match(doc2).should.equal true
+    query.match(doc3).should.equal false
