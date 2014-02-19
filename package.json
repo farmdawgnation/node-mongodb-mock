@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "coffee-script": "*",
-    "underscore": "*"
+    "lodash": "*"
   },
   "devDependencies": {
     "coffee-script": "1.7.1",

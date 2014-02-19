@@ -6,10 +6,10 @@ should = chai.should()
 describe "MongoMockCollection", ->
   exampleCollectionData = [
     {_id: "abc123", owner: "matt", someNumber: 4}
-    {_id: "abc123", owner: "matt", someNumber: 4}
-    {_id: "abc123", owner: "matt", someNumber: 4}
-    {_id: "abc123", owner: "matt", someNumber: 4}
-    {_id: "abc123", owner: "matt", someNumber: 4}
+    {_id: "def456", owner: "matt", someNumber: 4}
+    {_id: "okokok", owner: "matt", someNumber: 4}
+    {_id: "zzzzzz", owner: "matt", someNumber: 4}
+    {_id: "xxxxxx", owner: "matt", someNumber: 4}
   ]
 
   it 'should instantiate when a correclty formatted array of documents', ->
@@ -52,7 +52,7 @@ describe "MongoMockCollection", ->
     it 'should find no docs when no docs match', (done) ->
       newCollection = new MongoMockCollection exampleCollectionData
 
-      newCollection.find {_id: "zzzzzz"}, (err, docs) ->
+      newCollection.find {_id: "aaaaaa"}, (err, docs) ->
         should.not.exist err
         docs.should.have.length(0)
         done()

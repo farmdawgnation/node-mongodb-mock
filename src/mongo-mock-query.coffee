@@ -1,4 +1,4 @@
-_ = require 'underscore'
+_ = require 'lodash'
 
 class MongoMockQuery
   constructor: (@query) ->
