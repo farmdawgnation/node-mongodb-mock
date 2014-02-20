@@ -83,9 +83,7 @@ describe "MongoMockCollection", ->
         done()
 
   describe "#insert", ->
-    it 'should insert a new, properly formatted document'
-
-    it 'should error for an inproperly formatted document'
+    it 'should insert a new document'
 
   describe "#update", ->
     it 'should update a single match when only one matches w/ multi off'
