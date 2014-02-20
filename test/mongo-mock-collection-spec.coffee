@@ -83,7 +83,13 @@ describe "MongoMockCollection", ->
         done()
 
   describe "#insert", ->
-    it 'should insert a new document'
+    it 'should insert a new document', (done) ->
+      suiteCollection.insert {bacon: true}
+
+      suiteCollection.findOne {bacon: true}, (err, doc) ->
+        should.not.exist err
+        should.exist doc
+        done()
 
   describe "#update", ->
     it 'should update a single match when only one matches w/ multi off'

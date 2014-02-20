@@ -51,6 +51,14 @@ class MongoMockCollection
       callback = options
       options = null
 
+    unless document._id?
+      document._id = Math.random().toString(36).substring(7)
+
+    @documents.push(document)
+
+    if _.isFunction callback
+      callback null, document
+
   update: (query, updates, options, callback) ->
     callback()
 
