@@ -10,7 +10,15 @@ class MongoMockCollection
       unless document._id?
         throw "Mock documents require an _id"
 
-  find: (query, callback) ->
+  find: (query, fields, options, callback) ->
+    if _.isFunction fields
+      callback = fields
+      fields = null
+
+    if _.isFunction options
+      callback = options
+      options = null
+
     mockQuery = new MongoMockQuery query
 
     matchingDocumentsFilter = (matchingDocuments, documentToTest) ->
@@ -21,17 +29,40 @@ class MongoMockCollection
 
     results = _.reduce(@documents, matchingDocumentsFilter, [])
 
-    callback null, results
+    if _.isFunction callback
+      callback null, results
 
-  findOne: (query, callback) ->
+    results
+
+  findOne: (query, fields, options, callback) ->
+    if _.isFunction fields
+      callback = fields
+      fields = null
+
+    if _.isFunction options
+      callback = options
+      options = null
+
     @find query, (err, results) ->
       callback(err, results[0])
 
-  insert: (document, callback) ->
-    callback()
+  insert: (document, options, callback) ->
+    if _.isFunction options
+      callback = options
+      options = null
 
   update: (query, updates, options, callback) ->
     callback()
+
+  save: (document, options, callback) ->
+    if _.isFunction options
+      callback = options
+      options = null
+
+    if document._id?
+      @update {_id: document._id}, document, options, callback
+    else
+      @insert document, options, callback
 
   remove: (query, callback) ->
     callback()
