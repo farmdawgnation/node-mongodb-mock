@@ -27,7 +27,7 @@ describe "MongoMockCollection", ->
 
     newCollection = -> new MongoMockCollection notAnArray
 
-    (newCollection).should.Throw("Something other than an array was passed in.")
+    (newCollection).should.Throw("Documents in a MongoMockCollection should be an array.")
 
   it 'should throw an error if an incorrectly formatted array is passed in', ->
     someDocsBro = [
@@ -37,7 +37,7 @@ describe "MongoMockCollection", ->
 
     newCollection = -> new MongoMockCollection someDocsBro
 
-    (newCollection).should.Throw("Mock documents require an ID")
+    (newCollection).should.Throw("Mock documents require an _id")
 
   describe "#find", ->
     it 'should find a single doc when a single doc matches', (done) ->

@@ -2,7 +2,13 @@ MongoMockQuery = require './mongo-mock-query'
 _ = require 'lodash'
 
 class MongoMockCollection
-  constructor: (@documents) ->
+  constructor: (@documents = []) ->
+    unless _.isArray @documents
+      throw "Documents in a MongoMockCollection should be an array."
+
+    for document in @documents
+      unless document._id?
+        throw "Mock documents require an _id"
 
   find: (query, callback) ->
     mockQuery = new MongoMockQuery query
