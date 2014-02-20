@@ -1,4 +1,5 @@
 MongoMockQuery = require './mongo-mock-query'
+MongoMockUpdate = require './mongo-mock-update'
 _ = require 'lodash'
 
 class MongoMockCollection
@@ -60,7 +61,23 @@ class MongoMockCollection
       callback null, document
 
   update: (query, updates, options, callback) ->
-    callback()
+    if _.isFunction options
+      callback = options
+      options = null
+
+    matchingDocuments = @find query
+    updateToMake = new MongoMockUpdate updates
+
+    unless options?.multi
+      matchingDocuments = [_.first(matchingDocuments)]
+
+    updatedDocuments = for document in matchingDocuments
+      updateToMake.update document
+
+    if _.isFunction callback
+      callback null, updatedDocuments.length
+
+    updatedDocuments.length
 
   save: (document, options, callback) ->
     if _.isFunction options
