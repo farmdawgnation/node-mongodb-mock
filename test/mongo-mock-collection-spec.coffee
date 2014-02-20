@@ -12,6 +12,8 @@ describe "MongoMockCollection", ->
     {_id: "xxxxxx", owner: "matt", someNumber: 4}
   ]
 
+  suiteCollection = new MongoMockCollection exampleCollectionData
+
   it 'should instantiate when a correclty formatted array of documents', ->
     someDocsBro = [
       {_id: "abc123", bigBots: "i like them"}
@@ -41,36 +43,44 @@ describe "MongoMockCollection", ->
 
   describe "#find", ->
     it 'should find a single doc when a single doc matches', (done) ->
-      newCollection = new MongoMockCollection exampleCollectionData
-
-      newCollection.find {_id: "abc123"}, (err, docs) ->
+      suiteCollection.find {_id: "abc123"}, (err, docs) ->
         should.not.exist err
         docs.should.have.length(1)
         docs[0]._id.should.equal "abc123"
         done()
 
     it 'should find no docs when no docs match', (done) ->
-      newCollection = new MongoMockCollection exampleCollectionData
-
-      newCollection.find {_id: "aaaaaa"}, (err, docs) ->
+      suiteCollection.find {_id: "aaaaaa"}, (err, docs) ->
         should.not.exist err
         docs.should.have.length(0)
         done()
 
     it 'should find multiple docs when multiple match', (done) ->
-      newCollection = new MongoMockCollection exampleCollectionData
-
-      newCollection.find {}, (err, docs) ->
+      suiteCollection.find {}, (err, docs) ->
         should.not.exist err
         docs.should.have.length(exampleCollectionData.length)
         done()
 
   describe "#findOne", ->
-    it 'should find a single doc when a single doc matches'
+    it 'should find a single doc when a single doc matches', (done) ->
+      suiteCollection.findOne {_id: "abc123"}, (err, doc) ->
+        should.not.exist err
+        should.exist doc
+        doc._id.should.equal "abc123"
+        done()
 
-    it 'should find a single doc when multiple docs match'
+    it 'should find a single doc when multiple docs match', (done) ->
+      suiteCollection.findOne {}, (err, doc) ->
+        should.not.exist err
+        should.exist doc
+        doc._id.should.equal "abc123"
+        done()
 
-    it 'should find no docs when no docs match'
+    it 'should find no docs when no docs match', (done) ->
+      suiteCollection.findOne {_id: "aaaaaa"}, (err, doc) ->
+        should.not.exist err
+        should.not.exist doc
+        done()
 
   describe "#insert", ->
     it 'should insert a new, properly formatted document'
