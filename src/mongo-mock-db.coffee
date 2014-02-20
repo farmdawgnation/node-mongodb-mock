@@ -1,4 +1,5 @@
 MongoMockCollection = require './mongo-mock-collection'
+_ = require 'lodash'
 
 class MongoMockDb
   constructor: (initialData) ->
@@ -11,8 +12,16 @@ class MongoMockDb
     catch e
       throw "Invalid mock data passed into MongoMockDb."
 
-  collection: (collectionName) ->
+  createCollection: (name, options, callback) ->
+
+  collectionNames: (callback) ->
+
+  collections: (callback) ->
+
+  collection: (collectionName, options, callback) ->
     @collections[collectionName] = new MongoMockCollection() unless @collections[collectionName]?
     @collections[collectionName]
+
+  dropCollection: (collectionName, callback) ->
 
 module.exports = MongoMockDb
