@@ -70,7 +70,7 @@ class MongoMockCollection
     matchingDocuments = @find query
     updateToMake = new MongoMockUpdate updates
 
-    unless options?.multi
+    if ! options?.multi && matchingDocuments.length > 1
       matchingDocuments = [_.first(matchingDocuments)]
 
     updatedDocuments = for document in matchingDocuments
