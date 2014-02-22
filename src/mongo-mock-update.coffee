@@ -39,15 +39,13 @@ class MongoMockUpdate
 
 
   update: (doc) ->
-    newDoc = _.cloneDeep(doc)
-
     for targetField, newValue of @rawUpdate
       if targetField[0] == "$"
-        @dollarSignUpdate(newDoc, targetField, newValue)
+        @dollarSignUpdate(doc, targetField, newValue)
       else
-        newDoc = @rawUpdate
-        return newDoc
+        doc = @rawUpdate
+        return doc
 
-    newDoc
+    doc
 
 module.exports = MongoMockUpdate

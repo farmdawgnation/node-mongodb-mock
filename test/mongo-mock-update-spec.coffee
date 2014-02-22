@@ -71,6 +71,7 @@ describe 'MongoMockUpdate', ->
 
     _.isEqual(targetDoc, updatedDoc).should.equal true
 
+    exampleDoc = {someSet: ["a", "b", "d"]}
     targetDoc = {someSet: ["b", "d"]}
     updateInstruction = {"$pop": {"someSet": -1}}
 
