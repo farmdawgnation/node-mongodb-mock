@@ -3,13 +3,15 @@ MongoMockUpdate = require './mongo-mock-update'
 _ = require 'lodash'
 
 class MongoMockCollection
-  constructor: (@documents = []) ->
-    unless _.isArray @documents
+  constructor: (documents = []) ->
+    unless _.isArray documents
       throw "Documents in a MongoMockCollection should be an array."
 
-    for document in @documents
+    for document in documents
       unless document._id?
         throw "Mock documents require an _id"
+
+    @documents = _.cloneDeep(documents)
 
   find: (query, fields, options, callback) ->
     if _.isFunction fields
