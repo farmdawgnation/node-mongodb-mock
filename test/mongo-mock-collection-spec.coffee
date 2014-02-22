@@ -92,23 +92,83 @@ describe "MongoMockCollection", ->
         done()
 
   describe "#update", ->
-    it 'should update a single match when only one matches w/ multi off'
+    it 'should update a single match when only one matches w/ multi off', (done) ->
+      testCollection = new MongoMockCollection exampleCollectionData
 
-    it 'should update a single match when only one matches w/ multi on'
+      testCollection.update {_id: "abc123"}, {"$set": {bacon: false}}, (err, updatedDocs) ->
+        testCollection.find {bacon: false}, (err, docs) ->
+          updatedDocs.should.equal(1)
+          docs.length.should.equal(1)
+          docs[0]._id.should.equal("abc123")
+          done()
 
-    it 'should update a single match when multiple match w/ multi off'
+    it 'should update a single match when only one matches w/ multi on', (done) ->
+      testCollection = new MongoMockCollection exampleCollectionData
 
-    it 'should update all matches w/ multiple matches and multi on'
+      testCollection.update {_id: "abc123"}, {"$set": {bacon: false}}, {multi: true}, (err, updatedDocs) ->
+        testCollection.find {bacon: false}, (err, docs) ->
+          updatedDocs.should.equal(1)
+          docs.length.should.equal(1)
+          docs[0]._id.should.equal("abc123")
+          done()
 
-    it 'should update a single doc with no query and mutli off'
+    it 'should update a single match when multiple match w/ multi off', (done) ->
+      testCollection = new MongoMockCollection exampleCollectionData
 
-    it 'should update all docs with no query and multi on'
+      testCollection.update {owner: "matt"}, {"$set": {bacon: false}}, (err, updatedDocs) ->
+        testCollection.find {bacon: false}, (err, docs) ->
+          updatedDocs.should.equal(1)
+          docs.length.should.equal(1)
+          docs[0]._id.should.equal("abc123")
+          done()
+
+    it 'should update all matches w/ multiple matches and multi on', (done) ->
+      testCollection = new MongoMockCollection exampleCollectionData
+
+      testCollection.update {owner: "matt"}, {"$set": {bacon: false}}, {multi: true}, (err, updatedDocs) ->
+        testCollection.find {bacon: false}, (err, docs) ->
+          updatedDocs.should.equal(5)
+          docs.length.should.equal(5)
+          done()
+
+    it 'should update a single doc with no query and mutli off', (done) ->
+      testCollection = new MongoMockCollection exampleCollectionData
+
+      testCollection.update {}, {"$set": {bacon: false}}, (err, updatedDocs) ->
+        testCollection.find {bacon: false}, (err, docs) ->
+          updatedDocs.should.equal(1)
+          docs.length.should.equal(1)
+          docs[0]._id.should.equal("abc123")
+          done()
+
+    it 'should update all docs with no query and multi on', (done) ->
+      testCollection = new MongoMockCollection exampleCollectionData
+
+      testCollection.update {}, {"$set": {bacon: false}}, {multi: true}, (err, updatedDocs) ->
+        testCollection.find {bacon: false}, (err, docs) ->
+          updatedDocs.should.equal(5)
+          docs.length.should.equal(5)
+          done()
 
     it 'should upsert a doc if there are no matches w/ upsert on'
 
-    it 'should update no docs when none match w/ multi off'
+    it 'should update no docs when none match w/ multi off', (done) ->
+      testCollection = new MongoMockCollection exampleCollectionData
 
-    it 'should update no docs when none match w/ multi on'
+      testCollection.update {zzz: "zzzz"}, {"$set": {bacon: false}}, (err, updatedDocs) ->
+        testCollection.find {bacon: false}, (err, docs) ->
+          updatedDocs.should.equal(0)
+          docs.length.should.equal(0)
+          done()
+
+    it 'should update no docs when none match w/ multi on', (done) ->
+      testCollection = new MongoMockCollection exampleCollectionData
+
+      testCollection.update {zzz: "zzzz"}, {"$set": {bacon: false}}, {multi: true}, (err, updatedDocs) ->
+        testCollection.find {bacon: false}, (err, docs) ->
+          updatedDocs.should.equal(0)
+          docs.length.should.equal(0)
+          done()
 
   describe "#remove", ->
     it 'should remove all documents matching a query'
